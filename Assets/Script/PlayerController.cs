@@ -7,48 +7,19 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    /*[SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float jumpForce = 5f;
-
-
-
-    private void OnJump(InputValue value)
-    {
-        if (value.isPressed)
-        {
-           rb.AddForce((jumpForce * transform.up), ForceMode2D.Impulse); 
-        }
-    }*/
-
-    /*public float moveSpeed = 1f;
-
-    private Vector2 moveInput;
-    private Rigidbody2D rb;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-    }*/
-    
     Rigidbody2D rb2D => GetComponent<Rigidbody2D>();
 
     [SerializeField] private float jumpForce;
     [SerializeField] private Vector2 groundCheckDimensions;
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private float movementSpeed;
+    [SerializeField] private Transform feet;
 
     private bool isGrounded;
     private float horizontalInput;
+    private int jumpCount = 0;
+    private float mx;
+    private float jumpCoolDown;
     
 
     private void OnJump()
@@ -65,6 +36,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         CheckForGround();
+        if (Input.GetButtonDown("Jump"))
+        {
+            OnJump();
+        }
     }
 
     private void FixedUpdate()
