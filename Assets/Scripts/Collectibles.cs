@@ -5,7 +5,7 @@ public class Collectibles : MonoBehaviour
     [SerializeField] private CollectibleSpawner collectibleSpawner;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SoCollectibles collectibleObject;
-    
+
     private CollectibleType _collectibleType;
     private bool _isRespawnable;
 

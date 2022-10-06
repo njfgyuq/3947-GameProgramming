@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Checks")] 
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float extraGroundCheckDistance = 0.5f;
+
+    [SerializeField] private AudioSource jumpSoundEffect;
+    
     
     // Input Values
     private float _moveInput;
@@ -85,6 +88,9 @@ public class PlayerController : MonoBehaviour
     {
         _canJump = false; // Flag bool canJump is here is to prevent double jumping on jump pads since the code is shared.
         _lastJumpTimer = 0f - additionalTimeWait;
+        
+        jumpSoundEffect.Play();
+        
         rb.velocity = new Vector2(rb.velocity.x, 0f); // Reset the y-force to prevent player stacking up jump momentum.
         rb.AddForce(force * transform.up, ForceMode2D.Impulse);
     }
@@ -151,7 +157,7 @@ public class PlayerController : MonoBehaviour
     private void OnJump(InputValue value)
     {
         if (!value.isPressed) return;
-
+        
         TryJumping();
     }
 
